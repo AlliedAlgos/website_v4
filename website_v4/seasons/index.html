@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Team Seasons</title>
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon" href="./images/Allied-Algorithms_logo.png" />
+  <link rel="icon" type="image/x-icon" href="../images/Allied-Algorithms_logo.svg" />
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Navbar / Footer Loader -->
+  <script>
+    $(function () {
+      $("#navbar").load("../layout/navbar.html");
+      $("#footer").load("../layout/footer.html");
+    });
+  </script>
+
+  <!-- Page Script -->
+  <script src="seasons.js" defer></script>
+</head>
+
+<body class="min-h-screen flex flex-col bg-[#070707] text-white mt-32" style="font-family: 'Inter', sans-serif;">
+
+  <!-- Navbar -->
+  <div id="navbar"></div>
+
+  <!-- Main Content -->
+  <main class="flex-grow container mx-auto px-6 py-16">
+    <section id="current-season" class="mb-20"></section>
+
+    <h2 class="text-3xl font-bold mb-8 text-center">
+      Our Past Seasons
+    </h2>
+
+    <div id="past-seasons-container"></div>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer" class="w-full"></div>
+
+</body>
+</html>

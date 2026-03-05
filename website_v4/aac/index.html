@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Download AutoCorrection | Allied Algorithms</title>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    crossorigin="anonymous"
+  />
+
+  <link rel="icon" type="image/png" href="../images/logo.png" />
+
+  <!-- Navbar/Footer Loader -->
+  <script>
+    $(function () {
+      $("#navbar").load("../layout/navbar.html");
+      $("#footer").load("../layout/footer.html");
+    });
+  </script>
+
+  <style>
+    body {
+      font-family: "Inter", system-ui, sans-serif;
+      background-color: #070707;
+    }
+  </style>
+</head>
+
+<body class="flex flex-col items-center min-h-screen text-white px-4 mt-32">
+
+  <!-- Navbar -->
+  <div id="navbar" class="w-full"></div>
+
+  <!-- Main Card -->
+  <main class="max-w-2xl w-full mt-20 bg-[rgba(20,20,30,0.7)] p-10 rounded-xl shadow-xl border border-white/10 flex flex-col items-center">
+    
+    <!-- Title -->
+    <h1 class="text-4xl sm:text-5xl font-bold mb-6 text-center">
+      Download Allied AutoCorrection
+    </h1>
+
+    <!-- Description -->
+    <p class="text-gray-300 text-lg leading-relaxed mb-8 text-center">
+      Allied AutoCorrection is a powerful system for FLL teams, helping improve accuracy, consistency, and efficiency.
+    </p>
+
+    <!-- Download Form -->
+    <form id="downloadForm" class="flex flex-col gap-4 w-full">
+      <input
+        type="text"
+        id="teamNumber"
+        placeholder="Team #"
+        class="p-3 rounded-lg border border-gray-600 bg-gray-800 text-white
+               focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      >
+      <input
+        type="email"
+        id="email"
+        placeholder="Email"
+        class="p-3 rounded-lg border border-gray-600 bg-gray-800 text-white
+               focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      >
+
+      <button
+        type="submit"
+        id="downloadBtn"
+        class="mt-4 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md transition-all duration-200"
+      >
+        ⬇️ Download AutoCorrection.llsp3
+      </button>
+    </form>
+
+    <p id="status" class="text-gray-400 mt-4 text-sm text-center"></p>
+
+    <!-- Docs & GitHub -->
+    <section class="mt-10 w-full text-center">
+      <h3 class="text-2xl font-semibold mb-4 text-white">Documentation & Releases</h3>
+      <p class="text-gray-300 mb-6">
+        Learn more about AutoCorrection or stay up to date with our releases.
+      </p>
+
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+        <a href="https://alliedalgos.github.io/website/docs"
+           target="_blank"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg transition shadow">
+          📘 Documentation
+        </a>
+        <a href="https://github.com/AlliedAlgos"
+           target="_blank"
+           class="inline-flex items-center gap-2 px-6 py-3 bg-gray-800 hover:bg-gray-700 rounded-lg transition shadow">
+          🐙 GitHub Releases
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer" class="mt-10 w-full"></div>
+
+  <!-- Discord Webhook + Download Script -->
+  <script>
+    const DISCORD_WEBHOOK_URL =
+      "https://discord.com/api/webhooks/1377087321203150941/iK28JWFiXjPouGOpEVnvhExkIqPdp8H7P7HT5oSJHdpPFOgMsOde9s8fD-xSnyl_MNbQ";
+
+    const downloadBtn = document.getElementById("downloadBtn");
+    const status = document.getElementById("status");
+
+    document.getElementById("downloadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const teamNumber = document.getElementById("teamNumber").value.trim();
+      const email = document.getElementById("email").value.trim();
+
+      if (!teamNumber || !email) {
+        status.textContent = "Please fill in both Team # and Email to download.";
+        status.className = "text-red-400 mt-2 text-sm text-center";
+        return;
+      }
+
+      status.textContent = "Sending request...";
+      status.className = "text-yellow-400 mt-2 text-sm text-center";
+
+      const payload = {
+        embeds: [
+          {
+            title: "📥 AutoCorrection Download",
+            color: 5814783,
+            fields: [
+              { name: "Team #", value: teamNumber, inline: true },
+              { name: "Email", value: email, inline: true }
+            ],
+            timestamp: new Date().toISOString()
+          }
+        ]
+      };
+
+      try {
+        await fetch(DISCORD_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } catch (error) {
+        console.error("Webhook error:", error);
+      }
+
+      // Trigger File Download
+      const link = document.createElement("a");
+      link.href = "AutoCorrection.llsp3";
+      link.download = "AutoCorrection.llsp3";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      status.textContent = "Download started!";
+      status.className = "text-green-400 mt-2 text-sm text-center";
+    });
+  </script>
+
+</body>
+</html>

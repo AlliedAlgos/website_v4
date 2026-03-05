@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Allied Algos Navbar</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> 
+  
+  <style>
+    /* Your CSS unchanged */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fadeIn { animation: fadeIn 0.5s ease forwards; }
+
+    @keyframes slideInDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .animate-slideInDown { animation: slideInDown 0.5s ease forwards; }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .mobile-header-slide { animation: slideInDown 0.5s ease forwards; }
+    .mobile-menu-active {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        overflow: hidden; 
+    }
+    .dropdown-js-active {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        pointer-events: auto !important;
+    }
+    .arrow-rotate {
+        transform: rotate(180deg) !important;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white pt-28">
+
+  <div class="fixed top-0 left-0 w-full z-50">
+    <div class="flex justify-center items-center h-30 bg-black/70 backdrop-blur-xl border-b border-white/10 text-xl font-medium tracking-wide text-white/90 transition-all duration-300 animate-slideInDown">
+      <span>
+        AlliedAlgos Heading to Worlds →
+        <a href="../worlds" class="underline underline-offset-2 transition hover:opacity-70">Learn more</a>
+      </span>
+    </div>
+  </div>
+
+  <nav class="fixed top-14 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-6xl">
+    <div class="flex items-center justify-between px-6 py-4 rounded-full bg-black/70 backdrop-blur-xl border border-white/10 animate-slideInDown">
+
+      <div class="flex items-center gap-3">
+        <img src="../images/Allied-Algorithms_logo.svg" alt="Logo" class="h-[60px] w-auto transition-transform duration-300 hover:scale-105" />
+        <h1>Allied Algos</h1>
+      </div>
+
+      <ul class="hidden md:flex gap-8 text-sm font-medium tracking-wider">
+        <li class="group relative transition-all duration-300 hover:scale-105">
+          <a href="../home/">Home</a>
+          <span class="absolute left-0 -bottom-1 h-px w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+        </li>
+        <li class="group relative transition-all duration-300 hover:scale-105">
+          <a href="../about-us">About-us</a>
+          <span class="absolute left-0 -bottom-1 h-px w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+        </li>
+        <li class="group relative transition-all duration-300 hover:scale-105">
+          <a href="../seasons/">Seasons</a>
+          <span class="absolute left-0 -bottom-1 h-px w-0 bg-white transition-all duration-300 group-hover:w-full"></span>
+        </li>
+
+        <li id="projectsDropdownContainer" class="relative group">
+          <button id="projectsDropdownButton" aria-expanded="false" aria-controls="projectsDropdownMenu" class="flex items-center gap-1">
+            Projects
+            <svg id="projectsDropdownArrow" class="w-3 h-3 mt-px transition-transform duration-300" fill="none" stroke="white" stroke-width="1.5">
+              <path d="M6 9l6 6 6-6"/>
+            </svg>
+          </button>
+          <div id="projectsDropdownMenu" class="absolute left-0 top-full mt-3 w-44 rounded-xl bg-black/90 backdrop-blur-xl border border-white/10 opacity-0 translate-y-2 pointer-events-none transition-all duration-300">
+            <a href="../robot/" class="desktop-link block px-4 py-2 text-sm hover:bg-white/5 transition-all duration-300">Robot Designs</a>
+            <a href="../aac" class="desktop-link block px-4 py-2 text-sm hover:bg-white/5 transition-all duration-300">AutoCorrection</a>
+            <a href="../work/" class="desktop-link block px-4 py-2 text-sm hover:bg-white/5 transition-all duration-300">AlliedWork</a>
+            <a href="../docs/" class="desktop-link block px-4 py-2 text-sm hover:bg-white/5 transition-all duration-300">Documentation</a>
+          </div>
+        </li>
+      </ul>
+
+      <div class="flex items-center gap-4">
+        <a href="../contact-us/" class="hidden md:inline-flex items-center justify-center px-5 py-2 rounded-full border border-white/40 text-xs font-medium tracking-wide transition hover:bg-white hover:text-black hover:scale-105">Contact-us</a>
+        <button id="openMenu" class="md:hidden relative z-1000 transition hover:scale-110">
+          <svg width="24" height="24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <div id="mobileMenu" class="fixed inset-0 z-9999 bg-black/85 backdrop-blur-xl opacity-0 pointer-events-none transition-opacity duration-300 flex flex-col shadow-2xl">
+    
+    <div class="flex items-center justify-between px-6 py-5 border-b border-white/10 mobile-header-slide">
+      <img src="../images/Allied-Algorithms_logo.svg" alt="Logo" class="h-6 transition-transform duration-300 hover:scale-105" />
+      <button id="closeMenu" class="transition hover:scale-110">
+        <svg width="28" height="28" fill="none" stroke="white" stroke-width="1.5"><path d="M6 6l16 16M22 6L6 22"/></svg>
+      </button>
+    </div>
+
+    <div class="flex flex-col justify-start mt-4 px-6 gap-0 text-2xl font-medium tracking-widest animate-fadeIn">
+      
+      <a href="../home/" class="group mobile-link py-4 border-b border-white/5 transition hover:bg-white/5 hover:text-white/90">Home</a>
+      <a href="../about-us/" class="group mobile-link py-4 border-b border-white/5 transition hover:bg-white/5 hover:text-white/90">About-us</a>
+      <a href="../seasons/" class="group mobile-link py-4 border-b border-white/5 transition hover:bg-white/5 hover:text-white/90">Seasons</a>
+
+      <div class="flex flex-col gap-1 mt-6 border-t border-white/5 pt-4">
+        <span class="opacity-70 text-lg mb-2 pl-1 font-semibold text-white/80">Projects</span>
+        <a href="../robot/" class="group mobile-link pl-4 py-2 text-xl transition hover:bg-white/5 hover:text-white/90">Robot Designs</a>
+        <a href="../aac/" class="group mobile-link pl-4 py-2 text-xl transition hover:bg-white/5 hover:text-white/90">AutoCorrection</a>
+        <a href="../work/" class="group mobile-link pl-4 py-2 text-xl transition hover:bg-white/5 hover:text-white/90">AlliedWork</a>
+        <a href="../docs/" class="group mobile-link pl-4 py-2 text-xl transition hover:bg-white/5 hover:text-white/90">Documentation</a>
+      </div>
+
+      <a href="../contact-us/" class="mobile-link mt-8 inline-flex justify-center items-center px-8 py-4 rounded-full bg-white text-black text-lg tracking-wide font-bold transition hover:scale-[1.02] shadow-lg">GET ACCESS</a>
+    </div>
+  </div>
+  <div class="mt-50"></div>
+
+  <script>
+    $(document).ready(function() {
+      // --- MOBILE MENU ---
+      const $openMenu = $('#openMenu');
+      const $closeMenu = $('#closeMenu');
+      const $mobileMenu = $('#mobileMenu');
+      const $mobileLinks = $mobileMenu.find('.mobile-link');
+      const $body = $('body');
+
+      const closeMobileMenu = () => {
+        $mobileMenu.removeClass('mobile-menu-active');
+        $body.css('overflow', '');
+      };
+
+      const openMobileMenu = () => {
+        setDropdownState(false); 
+        $mobileMenu.addClass('mobile-menu-active');
+        $body.css('overflow', 'hidden');
+      };
+
+      $openMenu.on('click', openMobileMenu);
+      $closeMenu.on('click', closeMobileMenu);
+      $mobileLinks.on('click', closeMobileMenu);
+
+      // Close mobile menu on click outside
+      $(document).on('click', function(e) {
+        if (!$(e.target).closest('#mobileMenu, #openMenu').length) {
+          closeMobileMenu();
+        }
+      });
+
+      // --- DESKTOP DROPDOWN ---
+      const $dropdownContainer = $('#projectsDropdownContainer');
+      const $dropdownMenu = $('#projectsDropdownMenu');
+      const $dropdownArrow = $('#projectsDropdownArrow');
+      const $desktopLinks = $dropdownMenu.find('.desktop-link');
+      
+      let closeTimeout;
+      const CLOSE_DELAY_TIME = 1000; // 1s
+
+      const setDropdownState = (open) => {
+          $dropdownMenu.toggleClass('dropdown-js-active', open);
+          $dropdownArrow.toggleClass('arrow-rotate', open);
+          $('#projectsDropdownButton').attr('aria-expanded', open);
+      }
+
+      $dropdownContainer.on('mouseenter', function() {
+          clearTimeout(closeTimeout);
+          setDropdownState(true);
+      });
+
+      $dropdownContainer.on('mouseleave', function() {
+          closeTimeout = setTimeout(() => {
+              setDropdownState(false);
+          }, CLOSE_DELAY_TIME);
+      });
+      
+      $desktopLinks.on('click', function() {
+          setDropdownState(false);
+      });
+    });
+  </script>
+
+</body>
+</html>
